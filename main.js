@@ -38,21 +38,16 @@ function contact(){
     {
         if(C.getBoundingClientRect().y <= 50)
         {
-            // i.style.width = '50px';
             i.style.position = 'fixed';
             i.style.top = '';
             i.style.transform = 'scale(calc(1/3))' + ' ' + 'translate(225px,-325px)';
             i.style.borderRadius = '0px';
-            // i.style.top = '-100px';
-            // i.style.transform = '';
         }
         else
         {
-            // i.style.width = '300px';
             i.style.position = 'absolute';
             i.style.transform = 'translate(0px, 0px)' + ' ' + 'scale(1)';
             i.style.borderRadius = '50%';
-            // i.style.top = '25px';
         }
     }, 100);
 }
