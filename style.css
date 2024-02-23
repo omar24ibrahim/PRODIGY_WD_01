@@ -35,16 +35,11 @@ button{
     height: 50px;
 }
 
-button:hover{
-    background-color: blue;
-    color: white;
-    cursor: pointer;
-}
-
 #H, #C, #EDU, #EXP, #P{
     border: none;
     position: relative;
     padding: 10px;
+    height: 1000px;
 }
 
 #header{
@@ -54,14 +49,11 @@ button:hover{
     position: relative;
     height: 100px;
     padding: 7.5px;
+    margin-top: 20px;
 }
 
-#profile_photo{
-    border-radius: 50%;
-    width: 300px;
+#date{
     position: absolute;
-    top: 25px;
-    right: 25px;
-    z-index: 20;
-    transition: transform 1s;
+    top: 20px;
+    right: 20px;
 }

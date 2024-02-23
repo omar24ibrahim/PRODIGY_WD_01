@@ -1,5 +1,6 @@
-var h, c, edu, exp, p, f, date, H, C, EDU, EXP, P, i;
+var nav, h, c, edu, exp, p, f, date, H, C, EDU, EXP, P, ph, currentTag, tags, divs, colors, invColors;
 function init(){
+    nav = document.getElementById('list_items');
     h = document.getElementById('home');
     c = document.getElementById('contact');
     edu = document.getElementById('edu');
@@ -18,74 +19,88 @@ function init(){
     EDU.style.backgroundColor = 'rgb(200, 191, 231)';
     EXP.style.backgroundColor = 'rgb(255, 174, 201)';
     P.style.backgroundColor = 'rgb(153, 217, 234)';
-    i = document.getElementById('profile_photo');
-    home();
+    ph = document.getElementById('profile_photo');
+    tags = [h, c, edu, exp, p];
+    divs = [H, C, EDU, EXP, P];
+    colors = ['white', 'rgb(239, 228, 176)', 'rgb(200, 191, 231)', 'rgb(255, 174, 201)', 'rgb(153, 217, 234)'];
+    invColors = ['black', 'rgb(16, 27, 79)', 'rgb(55, 64, 24)', 'rgb(0, 81, 54)', 'rgb(102, 38, 21)'];
+    page(0);
 }
-function home(){
+function page(x){
     resetColors();
-    h.style.backgroundColor = 'blue';
-    h.style.color = 'white';
-    H.style.display = 'block';
-    document.body.style.backgroundColor = 'white';
+    setCurrent(x);
 }
-function contact(){
-    resetColors();
-    c.style.backgroundColor = 'blue';
-    c.style.color = 'white';
-    C.style.display = 'block';
-    document.body.style.backgroundColor = 'rgb(239, 228, 176)';
-    var interval = setInterval(function()
+window.onscroll = function(){
+    scrollMod();
+};
+function scrollMod(){
+    if(nav.getBoundingClientRect().y == 0)
     {
-        if(C.getBoundingClientRect().y <= 50)
+        nav.style.backgroundColor = 'rgb(30, 30, 30)';
+        for(i = 0; i < 5; i ++)
         {
-            i.style.position = 'fixed';
-            i.style.top = '';
-            i.style.transform = 'scale(calc(1/3))' + ' ' + 'translate(225px,-325px)';
-            i.style.borderRadius = '0px';
+            if(tags[i] == currentTag)
+            {
+                currentDiv.style.backgroundColor = document.body.style.backgroundColor = invColors[i];
+                currentDiv.style.color = 'white';
+                continue;
+            }
+            tags[i].style.backgroundColor = 'rgb(30, 30, 30)';
+            tags[i].style.color = 'white';
         }
-        else
+        if(currentTag == c)
         {
-            i.style.position = 'absolute';
-            i.style.transform = 'translate(0px, 0px)' + ' ' + 'scale(1)';
-            i.style.borderRadius = '50%';
+            ph.style.position = 'fixed';
+            ph.style.top = '';
+            ph.style.transform = 'scale(calc(1/3))' + ' ' + 'translate(225px,-325px)';
+            ph.style.borderRadius = '0px';
         }
-    }, 100);
-}
-function education(){
-    resetColors();
-    edu.style.backgroundColor = 'blue';
-    edu.style.color = 'white';
-    EDU.style.display = 'block';
-    document.body.style.backgroundColor = 'rgb(200, 191, 231)';
-}
-function experience(){
-    resetColors();
-    exp.style.backgroundColor = 'blue';
-    exp.style.color = 'white';
-    EXP.style.display = 'block';
-    document.body.style.backgroundColor = 'rgb(255, 174, 201)';
-}
-function projects(){
-    resetColors();
-    p.style.backgroundColor = 'blue';
-    p.style.color = 'white';
-    P.style.display = 'block';
-    document.body.style.backgroundColor = 'rgb(153, 217, 234)';
+    }
+    else
+    {
+        nav.style.backgroundColor = '';
+        for(i = 0; i < 5; i ++)
+        {
+            if(tags[i] == currentTag)
+            {
+                currentDiv.style.backgroundColor = document.body.style.backgroundColor = colors[i];
+                currentDiv.style.color = '';
+                continue;
+            }
+            tags[i].style.backgroundColor = '';
+            tags[i].style.color = '';
+            tags[i]
+        }
+        if(currentTag == c)
+        {
+            ph.style.position = 'absolute';
+            ph.style.transform = 'translate(0px, 0px)' + ' ' + 'scale(1)';
+            ph.style.borderRadius = '50%';
+        }
+    }
 }
 function resetColors(){
-    h.style.backgroundColor = '';
-    h.style.color = '';
-    H.style.display = 'none';
-    c.style.backgroundColor = '';
-    c.style.color = '';
-    C.style.display = 'none';
-    edu.style.backgroundColor = '';
-    edu.style.color = '';
-    EDU.style.display = 'none';
-    exp.style.backgroundColor = '';
-    exp.style.color = '';
-    EXP.style.display = 'none';
-    p.style.backgroundColor = '';
-    p.style.color = '';
-    P.style.display = 'none';
+    for(i = 0; i < 5; i ++)
+    {
+        tags[i].style.backgroundColor = '';
+        tags[i].style.color = '';
+        divs[i].style.display = 'none';
+        document.body.style.backgroundColor = '';
+    }
+}
+function setCurrent(n){
+    currentTag = tags[n];
+    currentDiv = divs[n];
+    currentTag.style.backgroundColor = 'blue';
+    currentTag.style.color = 'white';
+    currentDiv.style.display = 'block';
+    currentDiv.style.backgroundColor = document.body.style.backgroundColor = colors[n];
+}
+function hovering(b){
+    b.style.backgroundColor = 'blue';
+    b.style.color = 'white';
+    b.style.cursor = 'pointer';
+}
+function unhovering(b){
+    scrollMod();
 }
